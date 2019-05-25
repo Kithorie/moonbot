@@ -1,3 +1,4 @@
 git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py
 pip
 requests
+discord.py=1.1.1
