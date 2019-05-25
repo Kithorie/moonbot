@@ -107,20 +107,6 @@ async def e621(ctx, *, t:str): #comando criado com sucesso.
         await ctx.send('Este não é um canal **NSFW**, taokey?')
 
 @bot.command()
-async def lab(ctx): #este comando pega uma imagem random do PC, porém, não funciona direito.
-    '''Lab: pega imagens do computador NSFW e joga para você'''
-    imagepath = random.choice(os.listdir('/images'))
-
-    #embed = discord.Embed(title = 'OWO', description = 'owo')
-    #embed.set_image(url=imagepath)
-    #embed = discord.Embed(title = "Another command", description = "beep boop", color = 0x5810ea)
-    file = discord.File('/images/'+ imagepath)
-    if ctx.channel.is_nsfw():
-        await ctx.send(file = file)
-    else:
-        await ctx.send("este não é um canal NSFW. Por favor, tente novamente.")
-
-@bot.command()
 async def gato(ctx):
     '''um comando de gatos!'''
     url = 'https://aws.random.cat/meow'
@@ -132,27 +118,5 @@ async def gato(ctx):
     embed.set_footer(text = 'alimentado pelo random.cat')
 
     await ctx.send(embed = embed)
-
-#bot.command()
-async def tob(ctx):
-    '''o que você é? top ou bottom?'''
-    variaveis = ['bottom', 'top', 'flex']
-    zarolho = random.choices(variaveis)
-    linkstop = ['https://static1.e621.net/data/9b/36/9b36a6406793b6f742550d1d085f6b44.jpg',
-    'https://static1.e621.net/data/42/13/42139611a50cca5d3a17b90eb2132494.jpg',
-    'https://static1.e621.net/data/2f/35/2f35a9ad7fa52d818d46487aa2d90ba9.png']
-    linksbottom = ['https://static1.e621.net/data/47/21/4721b6736b7d8cab344cb90dab99ad55.jpg','https://static1.e621.net/data/9a/8f/9a8f74117e7898792c86235107161625.png', 'https://static1.e621.net/data/9a/8f/9a8f74117e7898792c86235107161625.png', 'https://static1.e621.net/data/cc/db/ccdbe9f13c2ac91173af9283c5dd6751.png']
-    if 'bottom' in zarolho:
-        afterwork = random.choices(linksbottom)
-        #users = ('{}'.format(ctx.author.mention)) 
-        #resposta = ' você é **bottom!**'
-        embed=discord.Embed(title="TEST", description="REV1", color=0x008080)
-        embed.set_image(url = afterwork)
-        embed.set_footer(text = 'Dominado pelo mais forte.')
-        await ctx.send (str(embed = embed))
-    if 'top' in zarolho:
-        await ctx.send ('2 BOT')
-    if 'flex' in zarolho:
-        await ctx.send ('3 BOT')
 
 bot.run(token) 
