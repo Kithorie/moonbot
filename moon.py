@@ -56,7 +56,7 @@ async def boasvindas(ctx, member: discord.Member):
 @bot.command() #o bot quem dará o abraço.
 async def abraco(ctx, member: discord.Member):
     '''Irá dar um abraço na pessoa que você marcar!'''
-    embed=discord.Embed(title="Você ganhou um abraço!", description="Doce doce longo abraço =w=", color=0x008080)
+    embed=discord.Embed(title="Você ganhou um abraço!", description="Doce doce longo abraço =w=", color=0x00bfff)
     embed.set_image(url='https://i.imgur.com/AYlbbmX.gif')
     users = ('{}'.format(ctx.author.mention)) 
     resposta = ' lhe deu um abraço bem apertado, '
@@ -67,7 +67,7 @@ async def abraco(ctx, member: discord.Member):
 @bot.command() 
 async def tapa(ctx, member: discord.Member):
     '''Irá dar um tapa bem forte na pessoa que você marcar!'''
-    embed=discord.Embed(title="Você mereceu um tapa!", description="Realmente mereceu.", color=0x008080)
+    embed=discord.Embed(title="Você mereceu um tapa!", description="Realmente mereceu.", color=0x00bfff)
     embed.set_image(url='https://i.kym-cdn.com/photos/images/original/001/264/655/379.gif')
     users = ('{}'.format(ctx.author.mention)) 
     resposta = ' lhe deu um forte tapa, '
@@ -77,7 +77,7 @@ async def tapa(ctx, member: discord.Member):
 @bot.command() 
 async def carinho(ctx, member: discord.Member):
     '''Um momento de carinho entre você e a pessoa que marcou.'''
-    embed=discord.Embed(title="Carinho time", description="owwwwwwn.", color=0x008080)
+    embed=discord.Embed(title="Carinho time", description="owwwwwwn.", color=0x00bfff)
     embed.set_image(url='https://media.tenor.com/images/aab83bd3725feeaccb9929f8ca964db9/tenor.gif')
     users = ('{}'.format(ctx.author.mention)) 
     resposta = ' está lhe dando carinho, '
@@ -98,7 +98,7 @@ async def e621(ctx, *, t:str): #comando criado com sucesso.
     catching = working[random.randint(0, limite)].get('id')
     links = 'https://e621.net/post/show/'
 
-    embed = discord.Embed(title = "Aqui está a imagem que me pediu!", description = "beep boop", color = 0x5810ea)
+    embed = discord.Embed(title = "Aqui está a imagem que me pediu!", description = "beep boop", color = 0x00bfff)
     embed.set_image(url = afterwork)
     embed.set_footer(text = 'Comando E621 feito com carinho')
     if ctx.channel.is_nsfw():
@@ -113,10 +113,23 @@ async def gato(ctx):
     meowurl = requests.get(url, headers = {'User-Agent': 'Moon/2'})
     data = meowurl.json()['file']
 
-    embed = discord.Embed(title = "Um gato para você!", description = "beep boop", color = 0x5810ea)
-    embed.set_image(url = data)
+    embed = discord.Embed(title = "Um gato para você!", description = "beep boop", color = 0x00bfff)
+    embed.set_image(url = data) 
     embed.set_footer(text = 'alimentado pelo random.cat')
 
     await ctx.send(embed = embed)
+
+@bot.command()
+async def lambida(ctx, member = discord.Member):
+    '''Isso irá com certeza lamber alguém.'''
+    gifs = ['https://media.giphy.com/media/RQ7jEZTiuNRV6/giphy.gif', 'https://media.giphy.com/media/ZnnHMeC7iDSzC/giphy.gif', 'https://media.giphy.com/media/AdbuzBaEVJsyI/giphy.gif', 'https://media.giphy.com/media/3wuuNSBXnNvMs/giphy.gif', 'https://iruntheinternet.com/lulzdump/images/red-panda-licking-glass-window-lick-panda-14233484910.gif', 'https://media1.tenor.com/images/3f0f32588374adf2768b223de3503ae8/tenor.gif']
+    embed = discord.Embed(title = "Você recebeu uma lambida!", description = "bleh! lick lick :P", color = 0x00bfff)
+    afterwork = random.choices(gifs)
+    embed.set_image(url = afterwork)
+    embed.set_footer(text = 'alimentado por giphy, E621 e imgur :3')
+    users = ('{}'.format(ctx.author.mention)) 
+    resposta = ' está lhe dando uma lambida, '
+    mencionado = ('{}'.format(member.mention))
+    await ctx.send(users + resposta + mencionado + '!', embed=embed)
 
 bot.run(token) 
