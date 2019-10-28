@@ -14,7 +14,7 @@ print(discord.__version__) #verificando versao do discord.py
 ## Variáveis                    ##
 ##################################
 description = 'Bot feito sob medida para o servidor da Lua de Gato'
-token = 'NTQ0NTI4NjU0Mjc3ODA0MDQ3.XbdOhA.vkUsFO5kRX11Fp9t2II77u4x0_w'
+token = 'TXaNAr71yRLAvO548AWehiUTskt3bgSP'
 bot = discord.ext.commands.Bot(command_prefix='>>')
 client = discord.Client()
 #Fim das variaveis
