@@ -6,6 +6,7 @@ import random
 import requests
 import json
 import os
+from discord.ext.commands import has_permissions, MissingPermissions
 
 print(discord.__version__) #verificando versao do discord.py
 
@@ -21,8 +22,9 @@ client = discord.Client()
 @bot.event
 async def on_ready():
     print("Carregando Moon...")
-    game = discord.Game("fofuras ao vento")
+    game = discord.Game("Nas Nuvens!")
     await bot.change_presence(status=discord.Status.online, activity=game)
+    print("Alimentado por Luna Development Studio")
 
 #@bot.event
 #async def on_message(message):
@@ -45,13 +47,17 @@ async def boop(ctx):
     embed.set_image(url='https://i.imgur.com/HKTYDr8.png')
     await ctx.send(embed=embed)
 
-#TODO: fazer ele ficar automatizado
-@bot.command()
-async def boasvindas(ctx, member: discord.Member):
-    '''Este comando serve para dar boas vindas ao novo membro.'''
-    users = ('{}'.format(member.mention))
-    await ctx.send('Olá e seja muito bem vindo ' + users + ' ao Reino dos Gatos!' '\n' 'Leia as regras deste servidor!' '\n' 'Para mais informações leia o manual!', file=discord.File('ola.png'))
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(530155132449587213) #mensagem irá direto pra sala_principal
+    usuario = ('{}'.format(member.mention))
+    await channel.send('boas vindas, ' + usuario + '!' '\n' 'Esperamos que você tenha uma boa estadia em nosso servidor.' '\n' 'Por favor, leia as regras com atenção!' '\n''Para mais informações, leia o manual!' '\n' 'Se veio pelo Bearstars, dá uma passada no canal Anime!')
 
+@bot.event
+async def on_member_remove(member):
+    channel = bot.get_channel(605496878779465728) #mensagem irá direto pro saida
+    username = ('{}'.format(member.display_name))
+    await channel.send ('O usuario ' + username + ' **saiu do servidor**')
 
 @bot.command() #o bot quem dará o abraço.
 async def abraco(ctx, member: discord.Member):
@@ -67,6 +73,7 @@ async def abraco(ctx, member: discord.Member):
     'https://media.giphy.com/media/13YrHUvPzUUmkM/giphy.gif'
     'https://thumbs.gfycat.com/AlienatedUnawareArcherfish-size_restricted.gif',
     'https://data.whicdn.com/images/280782407/original.gif',
+    'https://media1.tenor.com/images/3264bcc47ee47ebbdd441f9f1d203542/tenor.gif',
     ]
     remix = random.choice(abracos)
     embed=discord.Embed(title="Você ganhou um abraço!", description="Doce doce longo abraço =w=", color=0x00bfff)
@@ -201,7 +208,7 @@ async def dormir(ctx):
 
 @bot.command()
 async def fuck(ctx, member: discord.Member):
-    '''você sabe muito bem o que é isso. BETA COMMAND'''
+    '''você sabe muito bem o que é isso.'''
 
     headerstype = { "User-Agent":'moon/1.0 by Luna', "Content-Type":"application/json", }
 
@@ -293,5 +300,58 @@ async def sad(ctx):
     embed.set_image(url = remix)
     embed.set_footer(text = ';--------;')
     await ctx.send(embed = embed)
+
+@bot.command() #o bot quem dará o abraço.
+async def beijo(ctx, member: discord.Member):
+    '''Irá dar um beijo na pessoa que você marcar!'''
+    abracos = ['https://media1.tenor.com/images/31362a548dc7574f80d01a42a637bc93/tenor.gif',
+    'https://media1.tenor.com/images/45e529c116a1758fd09bdb27e2172eca/tenor.gif',
+    'https://media1.tenor.com/images/b1189e353db0bed3521885bec284264b/tenor.gif',
+    'https://media1.tenor.com/images/104b52a3be76b0e032a55df0740c0d3b/tenor.gif',
+    'https://media1.tenor.com/images/ef9687b36e36605b375b4e9b0cde51db/tenor.gif',
+    'https://media1.tenor.com/images/5c712c9fc3f17b1735a36b8ec65996ba/tenor.gif',
+    'https://media1.tenor.com/images/185d7a67052baca9b7a9db90a321329a/tenor.gif',
+    'https://media1.tenor.com/images/cddc857b201c0273452a7ceddf0acca4/tenor.gif'
+    'https://media1.tenor.com/images/04c894c51f70dd24acd59ec5392a1584/tenor.gif'
+    'https://media1.tenor.com/images/c4ff310ed4399ebe2c85ffc52ad5eeab/tenor.gif',
+    'https://media1.tenor.com/images/a66f4ac0deded0a2a12260cb1af11c3c/tenor.gif',
+    'https://media1.tenor.com/images/141cdec52c53abfebb0dece3f06f4177/tenor.gif',
+    'https://media1.tenor.com/images/20afd6fa304cd271ba789c45132f6755/tenor.gif',
+    'https://media1.tenor.com/images/1ec5380287a1eb3abd0faa66febeb081/tenor.gif',
+    ]
+    remix = random.choice(abracos)
+    embed=discord.Embed(title="Você ganhou um beijo!", description="-3- mwah! mwah!", color=0x00bfff)
+    embed.set_image(url= remix)
+    users = ('{}'.format(ctx.author.mention)) 
+    resposta = ' lhe deu um beijo, '
+    mencionado = ('{}'.format(member.mention))
+    await ctx.send(users + resposta + mencionado + '!', embed=embed)
+
+@bot.command()
+async def sk8(ctx):
+    '''Mas ela vai voltar, mas ela vai voltar'''
+    skatinho = ['https://cdn.discordapp.com/attachments/530155132449587213/620100443325988875/image0.png',
+                'https://cdn130.picsart.com/294383378067211.png'
+            ]
+    remix = random.choice(skatinho)
+    embed = discord.Embed(title = "Só os Skates sabem....", description = "Mas ela vai voltar..Mas ela vai Voltar aaaah", color = 0x00bfff)
+    embed.set_image(url = remix)
+    embed.set_footer(text = 'featuring lulinha')
+    await ctx.send(embed=embed)
+
+@bot.command()
+@has_permissions(manage_messages=True, manage_roles=True, ban_members=True)
+async def new(ctx, member: discord.Member, *, mot:str):
+    '''Comando para advertências'''
+    channel = bot.get_channel(638453245504651295)
+    embed = discord.Embed (title = "Notificação de Advertência", description = "Esta ação foi necessária para lhe notificar que você infringiu uma regra do servidor.")
+    avatar = member.avatar_url
+    administrador = ctx.message.author.avatar_url
+    embed.set_author(name=member.name, icon_url = avatar)
+    embed.set_footer (icon_url = administrador, text = "essa ação foi feita por: {}".format(ctx.author.name))
+    usuario = (' {} '.format(member.mention))
+    mensagem = "O membro "
+    espaco = " foi **advertido** por: "
+    await channel.send (mensagem + usuario + espaco + mot, embed = embed)
 
 bot.run(token) 
